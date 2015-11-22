@@ -1,0 +1,24 @@
+
+#main,
+#lsidebar,
+#rsidebar {
+    background-color: #D4D4BF;   
+    min-height: 400px;
+    text-align: center;
+}
+
+#flash,
+#featured-1,
+#featured-2,
+#featured-3,
+#triptych-1,
+#triptych-2,
+#triptych-3,
+#footer-column-1,
+#footer-column-2,
+#footer-column-3, 
+#footer-column-4 {
+    background-color: #D4D4BF;   
+    min-height: 120px;
+    text-align: center;
+}

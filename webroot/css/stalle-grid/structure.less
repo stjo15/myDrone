@@ -1,0 +1,189 @@
+
+
+
+
+/**
+ * Layout of the grid elements 
+ */
+ 
+#header {
+    .column(@columns);
+    margin-bottom: 66px;
+    text-align: center;
+}
+
+#navbar,
+#footer {
+    .column(@columns);
+    margin-bottom: 22px;
+}
+
+#flash {
+    .column(@columns);
+    margin-bottom: 22px;
+    text-align: center;
+}
+ 
+#main {
+    .column(@columns / 4 * 3);
+    margin-bottom: 22px;
+    min-height: 500px;
+}
+ 
+#featured-1,
+#featured-2,
+#featured-3 {
+    .column(@columns / 3);
+    margin-bottom: 22px;
+}
+
+
+#triptych-1,
+#triptych-2 {
+    .column(@columns / 2);
+    margin-bottom: 22px;
+    overflow: auto;
+}
+ 
+#lsidebar,
+#rsidebar,
+#footer-column-1,
+#footer-column-2,
+#footer-column-3, 
+#footer-column-4 {
+    .column(@columns / 4 - 10px);
+    margin-bottom: 22px;
+}
+ 
+
+// Style for element wrappers
+
+#wrapper {
+    max-width: 1360px;
+    overflow: hidden;
+    padding: 1em;
+}
+
+#wrap-featured,
+#wrap-main,
+#wrap-triptych,
+#wrap-footer-col {
+    .clearfix();
+}
+
+/**
+ * Style for header
+ */
+
+.sitelogo {
+  position: inherit;
+  margin-top: 2em;
+  padding-right: 2em;
+}
+ 
+.sitetitle {
+  position: relative;
+  color: #CD061A;
+  font-size: 36px;
+}
+
+.siteslogan {
+  position: inherit;
+  display: block;
+  padding: 10px;
+  font-size: 25px;
+  font-style: italic;
+  color: #666;
+}
+
+.loginlink {
+  float: right;
+  display: block;
+  position: relative;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.loginlink a {
+  color: @theme;
+}
+
+.loginacronym {
+  color: @theme;
+  padding-right: 1em;
+}
+
+.byline {
+  margin-top: 44px;
+  border-top: 1px dashed #ccc;
+  padding-top: 22px;
+  color: #666;
+  font-style: italic;
+}
+
+.byline p {
+  margin-top: 0;
+}
+
+/**
+ * For comments
+ */
+
+.comment {
+    margin: 2em;
+    border-top: 1px solid #415846;
+    padding: 10px;
+}
+
+.comment-content {
+    width: 60%;
+    margin: 1em;
+}
+
+.tag-label {
+    padding: 2px;
+    margin: 0 4px 0 4px;
+    background-color: @theme-bg;
+    border-radius: 3px;
+    color: @theme;
+}
+    
+.tag-label a {
+    color: @theme;
+}
+
+.sidebar-list {
+    margin-left: 0.5em;
+}
+
+.sidebar-list li {
+    margin: 0.5em;
+}
+
+.comment-footer {
+    margin: 5px;
+    border: 1px solid #415846;
+    padding: 0.5em;
+    max-width: 300px;
+    overflow: auto;
+}
+
+.comment-footer p {
+    margin: 5px;
+    padding: 5px;
+}
+
+.gravatar {
+    padding: 0 2em 0 2em;
+}
+
+.rss {
+    color: #FF9900;
+    text-shadow: 1px 3px 1px #aaa;
+}
+
+.gold {
+    padding: 0.1em;
+    color: #FFE165;
+    text-shadow: 0 0 5px #333;
+}

@@ -1,0 +1,30 @@
+<?php
+/**
+* This is a Stalle pagecontroller.
+ *
+ */
+// Include the essential config-file which also creates the $stalle variable with its defaults.
+include(__DIR__.'/config.php');
+
+// Create the object to display sourcecode
+//$source = new CSource();
+$source = new CSource(array('secure_dir' => '..', 'base_dir' => '..'));
+
+// Do it and store it all in variables in the Stalle container.
+$stalle['title'] = "Källkod";
+
+$stalle['header'] = <<<EOD
+<img class='sitelogo' src='img/stalle.png' alt='Stalle Logo'/>
+<span class='sitetitle'>Staffans Me-sida</span>
+<span class='siteslogan'>Kursen objektorienterad PHP</span>
+EOD;
+
+$stalle['main'] = "<h1>Visa källkod</h1>\n" . $source->View();
+
+$stalle['footer'] = <<<EOD
+<footer><span class='sitefooter'>Copyright (c) Staffan Johansson (stalle.johansson@gmail.com) | <a href='http://validator.w3.org/unicorn/check?ucn_uri=referer&amp;ucn_task=conformance'>Unicorn</a></span></footer>
+EOD;
+ 
+ 
+// Finally, leave it all to the rendering phase of Stalle.
+include(STALLE_THEME_PATH);
