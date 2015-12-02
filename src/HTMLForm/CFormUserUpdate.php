@@ -52,8 +52,7 @@ class CFormUserUpdate extends \Mos\HTMLForm\CForm
                 'type'        => 'password',
                 'label'       => 'Nuvarande lösenord',
                 'required'    => true,
-                'validation'  => ['not_empty', 'not_equal' =>
-                    $this->password],
+                'validation'  => ['not_empty'],
             ],
             
             'newpassword' => [
@@ -116,7 +115,12 @@ class CFormUserUpdate extends \Mos\HTMLForm\CForm
      */
     public function callbackSubmit()
     {
-        
+        $valid = password_verify($this->Value('password'), $this->password);
+        if($valid) {
+            $password = empty($this->Value('newpassword')) ? $this->password : password_hash($this->Value('newpassword'), PASSWORD_DEFAULT);
+        } else {
+            return false; 
+        }
         $now = gmdate('Y-m-d H:i:s');
         
         if ($this->activedate == null && !empty($_POST['active'])) {
@@ -126,11 +130,11 @@ class CFormUserUpdate extends \Mos\HTMLForm\CForm
         $this->activedate = null;
         }
         
-        $password = empty($this->Value('newpassword')) ? $this->Value('password') : $this->Value('newpassword');
         $web = !empty($_POST['web']) ? $this->Value('web') : '';
         
         $this->user = new \Anax\Users\User();
         $this->user->setDI($this->di);
+        
         $saved = $this->user->save(array('id' => $this->id, 'acronym' => $this->acronym, 'email' => $this->Value('email'), 'name' => $this->Value('name'), 'web' => $web, 'password' => $password, 'created' => $now, 'updated' => $now, 'deleted' => null, 'active' => $this->activedate, 'gravatar' => 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($this->Value('email')))) . '.jpg'));
     
        // $this->saveInSession = true;
@@ -176,7 +180,7 @@ class CFormUserUpdate extends \Mos\HTMLForm\CForm
      */
     public function callbackFail()
     {
-        $this->AddOutput("<p><i>Form was submitted and the Check() method returned false.</i></p>");
+        $this->AddOutput("<p><i>Formuläret har fyllts i felaktigt.</i></p>");
         $this->redirectTo();
     }
 }

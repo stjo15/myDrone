@@ -651,6 +651,16 @@ hr {
 .tag-label a {
   color: #00D0C6;
 }
+.tag-list {
+  display: inline;
+}
+.tag {
+  border: 1px solid #666;
+  width: 150px;
+  float: left;
+  margin: 1em;
+  padding: 0.5em;
+}
 .sidebar-list {
   margin-left: 0.5em;
 }

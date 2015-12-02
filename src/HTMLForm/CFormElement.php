@@ -545,7 +545,6 @@ EOD;
                 'message' => 'You must accept this.',
                 'test' => 'return $checked;'
             ],
-
             'custom_test' => true,
         ];
 

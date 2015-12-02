@@ -181,7 +181,7 @@ class QuestionController implements \Anax\DI\IInjectionAware
     }
     
     /**
-     * View all tags.
+     * View all tags in ordered list.
      *
      * @return void
      */
@@ -196,6 +196,28 @@ class QuestionController implements \Anax\DI\IInjectionAware
             'tags' => $tags,
             'title' => $title,
         ], 'rsidebar');
+        
+    }
+    
+    /**
+     * View all tags in page.
+     *
+     * @return void
+     */
+    public function listTagsAction($orderby='questions DESC', $limit=100)
+    {
+        $this->tag = new \Anax\Question\Tag();
+        $this->tag->setDI($this->di);
+        
+        $tags = $this->tag->findAll($orderby, $limit);
+        $title = 'Alla kategorier';
+        
+        $this->theme->setTitle("Alla kategorier");
+        
+        $this->views->add('question/list-all-tags', [
+            'tags' => $tags,
+            'title' => $title,
+        ], 'main');
         
     }
     

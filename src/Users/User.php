@@ -123,5 +123,14 @@ class User extends \Anax\MVC\CDatabaseModel
         }
             
     }
+    
+    public function findByAcronym($acronym)
+    {
+        $user = $this->query()
+                ->where('acronym = ?')
+                ->execute([$acronym]);
+                
+            return $user;
+    }
   
 }

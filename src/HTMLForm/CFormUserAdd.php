@@ -24,7 +24,20 @@ class CFormUserAdd extends \Mos\HTMLForm\CForm
                 'type'        => 'text',
                 'label'       => 'Användarnamn',
                 'required'    => true,
-                'validation'  => ['not_empty'],
+                'validation'  => array('not_empty', 'custom_test' => array(
+                    'message' => 'Användarnamnet är redan taget.', 
+                    'test' => function ($value) {
+                        $this->user = new \Anax\Users\User();
+                        $this->user->setDI($this->di);
+                        $users = $this->user->findAll();
+                        foreach ($users as $user) {
+                            $acronym = $user->acronym;
+                            if($acronym == $value) {
+                                return false;
+                            }
+                        }
+                    }),
+                ),
             ],
             'name' => [
                 'type'        => 'text',
@@ -103,7 +116,7 @@ class CFormUserAdd extends \Mos\HTMLForm\CForm
 
         $this->newuser = new \Anax\Users\User();
         $this->newuser->setDI($this->di);
-        $saved = $this->newuser->save(array('acronym' => $this->Value('acronym'), 'email' => $this->Value('email'), 'name' => $this->Value('name'), 'web' => $this->Value('web'), 'password' => $this->Value('password'), 'created' => $now, 'updated' => $now, 'deleted' => null, 'active' => $active, 'gravatar' => 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($this->Value('email')))) . '.jpg'));
+        $saved = $this->newuser->save(array('acronym' => $this->Value('acronym'), 'email' => $this->Value('email'), 'name' => $this->Value('name'), 'web' => $this->Value('web'), 'password' => password_hash($this->Value('password'),PASSWORD_DEFAULT), 'created' => $now, 'updated' => $now, 'deleted' => null, 'active' => $active, 'gravatar' => 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($this->Value('email')))) . '.jpg'));
     
        // $this->saveInSession = true;
         
@@ -111,7 +124,9 @@ class CFormUserAdd extends \Mos\HTMLForm\CForm
         {
         return true;
         }
-        else return false;
+        else {
+            return false;
+        }
     }
 
 
@@ -122,7 +137,7 @@ class CFormUserAdd extends \Mos\HTMLForm\CForm
      */
     public function callbackSubmitFail()
     {
-        $this->AddOutput("<p><i>DoSubmitFail(): Form was submitted but I failed to process/save/validate it</i></p>");
+        $this->AddOutput("<p><i>Formuläret fylldes inte i korrekt.</i></p>");
         return false;
     }
 
@@ -145,7 +160,7 @@ class CFormUserAdd extends \Mos\HTMLForm\CForm
      */
     public function callbackFail()
     {
-        $this->AddOutput("<p><i>Form was submitted and the Check() method returned false.</i></p>");
+        $this->AddOutput("<p><i>Formuläret fylldes inte i korrekt.</i></p>");
         $this->redirectTo();
     }
 }

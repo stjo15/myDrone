@@ -81,9 +81,23 @@ return [
                  ],
              ],
          ],  
+         
+         // This is a menu item
+        'tags'  => [
+            'text'  => 'Kategorier',
+            'url'   => $this->di->get('url')->create('question/list-tags'),
+            'title' => ''
+        ],
         
         // This is a menu item
-        'user'  => [
+        'users'  => [
+            'text'  => 'Användare',
+            'url'   => $this->di->get('url')->create('users/list-users'),
+            'title' => ''
+        ],
+        
+        // This is a menu item
+        'profile'  => [
             'text'  => 'Min profil',
             'url'   => $this->di->get('url')->create('users'),
             'title' => ''

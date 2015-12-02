@@ -65,13 +65,15 @@ class CFormUserLogin extends \Mos\HTMLForm\CForm
         $this->user = new \Anax\Users\User();
         $this->user->setDI($this->di);
         
+        
         $res = $this->user->query()
             ->where('acronym = ?')
-            ->andWhere('password = ?')
-		    ->execute(array($_POST['acronym'], $_POST['password']));
+		    ->execute(array($_POST['acronym']));
         
-        if(isset($res[0]))
-        {
+		if(isset($res[0])) {
+		        $valid = password_verify($_POST['password'], $res[0]->getProperties()['password']);    
+		}
+        if(isset($valid)) {
             $_SESSION['user'] = $res[0];
             return true;
         }
@@ -108,7 +110,7 @@ class CFormUserLogin extends \Mos\HTMLForm\CForm
      */
     public function callbackFail()
     {
-        $this->AddOutput("<p><i>Form was submitted and the Check() method returned false.</i></p>");
+        $this->AddOutput("<p><i>Du har skrivit in fel användarnamn eller lösenord.</i></p>");
         $this->redirectTo();
     }
 }

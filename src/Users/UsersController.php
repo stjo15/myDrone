@@ -23,7 +23,7 @@ class UsersController implements \Anax\DI\IInjectionAware
     
     
     /**
-    * List all users.
+    * List all users in admin page.
     *
     * @return void
     */
@@ -42,6 +42,22 @@ class UsersController implements \Anax\DI\IInjectionAware
         ], 'main');
         
         $this->views->add('users/users-sidebar', [], 'rsidebar');
+     }
+     
+     /**
+    * List all users on public page.
+    *
+    * @return void
+    */
+    public function listUsersAction()
+    {
+        $all = $this->users->findAll();
+ 
+        $this->theme->setTitle("Alla användare");
+        $this->views->add('users/list-users', [
+            'users' => $all,
+            'title' => "Alla användare",
+        ], 'main');
      }
      
      /**

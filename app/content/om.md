@@ -2,7 +2,7 @@
 # Om Drone Zone #
 
 Drone Zone är en kunskapsbank och mötesplats för alla som har ett intresse av
-obemannade luftfarkoster, även kallade UAV (Unmanned Aerial Vehicle), förarlösa plan eller drönare. 
+obemannade luftfarkoster, även kallade UAV (*Unmanned Aerial Vehicle*), förarlösa plan eller drönare. 
 Se <a href="https://sv.wikipedia.org/wiki/Obemannad_luftfarkost" target="_blank">Wikipedias
 artikel om drönare</a> för mer information om begreppet. *Drone* är det engelska 
 ordet för drönare. 

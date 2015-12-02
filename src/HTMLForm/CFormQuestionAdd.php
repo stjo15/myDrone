@@ -86,6 +86,10 @@ class CFormQuestionAdd extends \Mos\HTMLForm\CForm
      */
     public function callbackSubmit()
     {
+        if(empty($_POST['tag'])) {
+            $this->AddOutput("<p><i>Du måste välja minst en kategori!</i></p>");
+            return false;
+        }
         
         $now = date('Y-m-d H:i:s');
         
